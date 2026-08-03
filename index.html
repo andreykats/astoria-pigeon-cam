@@ -32,10 +32,10 @@
 
   <main>
     <section class="stream-section" aria-label="Live video and chat">
-      <div class="stream-layout">
-        <div class="video-wrapper" id="video-wrapper" data-state="loading">
+      <div class="stream-layout" data-state="loading">
+        <div class="video-wrapper" id="video-wrapper">
           <div id="yt-player" class="yt-target"></div>
-          <div class="video-status">
+          <div class="state-overlay">
             <div class="status-loading">
               <div class="loading-egg" aria-hidden="true"></div>
               <p>Loading stream&hellip;</p>
@@ -57,7 +57,23 @@
             </div>
           </div>
         </div>
-        <div class="chat-wrapper" id="chat-container" aria-label="Live chat"></div>
+        <div class="chat-wrapper" id="chat-container" aria-label="Live chat">
+          <div class="state-overlay">
+            <div class="status-loading">
+              <div class="loading-egg" aria-hidden="true"></div>
+              <p>Loading chat&hellip;</p>
+            </div>
+            <div class="status-offline">
+              <svg class="chat-icon" viewBox="0 0 80 80" aria-hidden="true">
+                <path d="M14 16h52a6 6 0 0 1 6 6v28a6 6 0 0 1-6 6H34l-14 12V56h-6a6 6 0 0 1-6-6V22a6 6 0 0 1 6-6Z" fill="none" stroke="var(--color-accent)" stroke-width="4" stroke-linejoin="round"/>
+                <circle cx="30" cy="36" r="3.5" fill="var(--color-accent)"/>
+                <circle cx="44" cy="36" r="3.5" fill="var(--color-accent)"/>
+                <circle cx="58" cy="36" r="3.5" fill="var(--color-accent)"/>
+              </svg>
+              <p>Chat unavailable &mdash; check back once the stream is live.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 

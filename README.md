@@ -32,11 +32,16 @@ Entries render in the order they appear in the array (oldest first).
 
 ## Known limitation
 
-The live chat iframe only shows real content when the video is actually
-live *and* the page is served from the real domain it will end up hosted
-on (chat checks the page's domain against the video). Opening `index.html`
-locally (`file://` or `localhost`) is fine for checking the video player
-and layout, but chat won't authenticate there — that's expected.
+Chat only starts loading once the video player confirms `videoId` is
+valid, so an invalid/placeholder ID now shows the chat panel's own
+"Chat unavailable" placeholder instead of YouTube's error page. Once the
+ID is valid, chat still only shows real content when the video is
+actually live *and* the page is served from the real domain it will end
+up hosted on (chat checks the page's domain against the video) — that
+part can't be detected from our side, since the chat iframe is
+cross-origin. Opening `index.html` locally (`file://` or `localhost`) is
+fine for checking the video player and layout, but chat won't
+authenticate there — that's expected.
 
 ## Deploy to GitHub Pages
 

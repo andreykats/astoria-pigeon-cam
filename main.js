@@ -1,9 +1,15 @@
-// Video player: load the YouTube IFrame API, create the player, and fall
-// back to the offline placeholder if it errors out or never loads.
+// Video player + live chat: load the YouTube IFrame API and create the
+// player. Chat is only loaded once the player confirms the video ID is
+// valid (onReady) — otherwise the chat iframe would end up requesting
+// live_chat for a broken video ID and showing YouTube's own error page.
+// If the player never loads (timeout) or errors out, both panels fall
+// back to their own offline placeholders instead.
 (function () {
   var LOAD_TIMEOUT_MS = 8000;
-  var wrapper = document.getElementById("video-wrapper");
+  var streamLayout = document.querySelector(".stream-layout");
+  var chatContainer = document.getElementById("chat-container");
   var loadTimer = setTimeout(showOffline, LOAD_TIMEOUT_MS);
+  var chatLoaded = false;
 
   function clearLoadTimer() {
     if (loadTimer) {
@@ -14,7 +20,23 @@
 
   function showOffline() {
     clearLoadTimer();
-    wrapper.dataset.state = "offline";
+    streamLayout.dataset.state = "offline";
+  }
+
+  function loadChat() {
+    if (chatLoaded) return;
+    chatLoaded = true;
+
+    var hostname = window.location.hostname || "localhost";
+    var iframe = document.createElement("iframe");
+    iframe.src =
+      "https://www.youtube.com/live_chat?v=" +
+      encodeURIComponent(CONFIG.videoId) +
+      "&embed_domain=" +
+      encodeURIComponent(hostname);
+    iframe.title = "Live chat";
+    iframe.setAttribute("frameborder", "0");
+    chatContainer.appendChild(iframe);
   }
 
   window.onYouTubeIframeAPIReady = function () {
@@ -24,7 +46,8 @@
       events: {
         onReady: function () {
           clearLoadTimer();
-          wrapper.dataset.state = "ready";
+          streamLayout.dataset.state = "ready";
+          loadChat();
         },
         onError: showOffline
       }
@@ -35,22 +58,6 @@
   apiTag.src = "https://www.youtube.com/iframe_api";
   apiTag.onerror = showOffline;
   document.head.appendChild(apiTag);
-})();
-
-// Live chat: build the embed URL from the current hostname so it works
-// on whatever domain the page ends up served from.
-(function () {
-  var container = document.getElementById("chat-container");
-  var hostname = window.location.hostname || "localhost";
-  var iframe = document.createElement("iframe");
-  iframe.src =
-    "https://www.youtube.com/live_chat?v=" +
-    encodeURIComponent(CONFIG.videoId) +
-    "&embed_domain=" +
-    encodeURIComponent(hostname);
-  iframe.title = "Live chat";
-  iframe.setAttribute("frameborder", "0");
-  container.appendChild(iframe);
 })();
 
 // Timeline: render the hand-edited TIMELINE_EVENTS list in order.

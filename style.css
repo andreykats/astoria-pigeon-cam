@@ -105,7 +105,7 @@ h1 {
   border: 0;
 }
 
-.video-status {
+.state-overlay {
   position: absolute;
   inset: 0;
   display: none;
@@ -125,19 +125,19 @@ h1 {
   color: var(--color-text);
 }
 
-.video-wrapper[data-state="loading"] .yt-target {
+.stream-layout[data-state="loading"] .yt-target {
   visibility: hidden;
 }
-.video-wrapper[data-state="loading"] .video-status,
-.video-wrapper[data-state="loading"] .status-loading {
+.stream-layout[data-state="loading"] .state-overlay,
+.stream-layout[data-state="loading"] .status-loading {
   display: flex;
 }
 
-.video-wrapper[data-state="offline"] .yt-target {
+.stream-layout[data-state="offline"] .yt-target {
   display: none;
 }
-.video-wrapper[data-state="offline"] .video-status,
-.video-wrapper[data-state="offline"] .status-offline {
+.stream-layout[data-state="offline"] .state-overlay,
+.stream-layout[data-state="offline"] .status-offline {
   display: flex;
 }
 
@@ -151,6 +151,11 @@ h1 {
 
 .pigeon-illustration {
   width: min(240px, 60%);
+  height: auto;
+}
+
+.chat-icon {
+  width: 64px;
   height: auto;
 }
 
@@ -176,6 +181,7 @@ h1 {
 }
 
 .chat-wrapper {
+  position: relative;
   flex: 0 0 auto;
   height: 420px;
   border-radius: 16px;
