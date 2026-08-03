@@ -223,6 +223,11 @@ h1 {
   margin-bottom: var(--space-3);
 }
 
+.timeline-scroll {
+  overflow-x: auto;
+  padding-bottom: var(--space-1);
+}
+
 .timeline-list {
   position: relative;
   list-style: none;
@@ -275,6 +280,41 @@ h1 {
   font-family: var(--font-display);
   font-size: 1.2rem;
   margin-top: 0.15rem;
+}
+
+/* Above the breakpoint, the timeline runs left-to-right instead of
+   top-to-bottom. It scrolls horizontally once entries outgrow the
+   available width, rather than squeezing items down over time. */
+@media (min-width: 900px) {
+  .timeline-list {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding-left: 0;
+    max-width: none;
+  }
+
+  .timeline-list::before {
+    left: 0;
+    right: 0;
+    top: 0.5rem;
+    bottom: auto;
+    width: auto;
+    height: 2px;
+  }
+
+  .timeline-item {
+    flex: 0 0 200px;
+    padding-top: 1.75rem;
+    padding-bottom: 0;
+  }
+
+  .timeline-item::before {
+    left: 50%;
+    top: -5px;
+    transform: translateX(-50%);
+  }
 }
 
 /* Footer */
