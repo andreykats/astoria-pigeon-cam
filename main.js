@@ -49,7 +49,10 @@
           streamLayout.dataset.state = "ready";
           loadChat();
         },
-        onError: showOffline
+        onError: function (event) {
+          console.error("YouTube player error code:", event.data);
+          showOffline();
+        }
       }
     });
   };
