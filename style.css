@@ -312,7 +312,7 @@ h1 {
 
   .timeline-item::before {
     left: 50%;
-    top: -5px;
+    top: calc(0.5rem - 5px);
     transform: translateX(-50%);
   }
 }
