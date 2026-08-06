@@ -33,7 +33,8 @@
       "https://www.youtube.com/live_chat?v=" +
       encodeURIComponent(CONFIG.videoId) +
       "&embed_domain=" +
-      encodeURIComponent(hostname);
+      encodeURIComponent(hostname) +
+      "&dark_theme=1";
     iframe.title = "Live chat";
     iframe.setAttribute("frameborder", "0");
     chatContainer.appendChild(iframe);
