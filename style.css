@@ -307,6 +307,7 @@ h1 {
 
   .timeline-item {
     flex: 0 0 var(--timeline-item-width);
+    width: var(--timeline-item-width);
     padding-top: 1.75rem;
     padding-bottom: 0;
   }
