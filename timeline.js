@@ -3,5 +3,6 @@
 const TIMELINE_EVENTS = [
   { date: "July 25, 2026", text: "Pigeons arrival" },
   { date: "July 26, 2026", text: "Nest building has begun" },
-  { date: "July 28, 2026", text: "Eggs layed" }
+  { date: "July 28, 2026", text: "Eggs layed" },
+  { date: "August 14, 2026", text: "Eggs Hatched!" }
 ];
